@@ -1,0 +1,22 @@
+version: '3'
+services:
+  nginx:
+    image: bitnami/nginx:latest
+    ports:
+      - 3080:8080
+    volumes:
+      - ./docker/nginx-vhost/laravel.nginx:/bitnami/nginx/conf/vhosts/laravel.conf
+      - .:/app
+  mariadb:
+    image: bitnami/mariadb:latest
+    environment:
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=laravel_bitnami_emp
+      - MARIADB_USER=laravel_bitnami_emp
+      - MARIADB_PASSWORD=laravel_bitnami_emp
+    volumes:
+      - ./docker/data/mariadb:/bitnami
+  php-fpm:
+    image: bitnami/php-fpm:latest
+    volumes:
+      - .:/app
