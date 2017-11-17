@@ -6,12 +6,13 @@ A bare-bones laravel install using the [Bitnami EMP docker config](https://docs.
 
 In the project root, start everything with `docker-compose up -d`. This will start the containers in 'daemon' mode so it doesn't clutter up your terminal with log output.
 
-Run the following commands to install dependencies, set up your `.env` file properly, set app key etc:
+Run the following commands to install dependencies, set up your `.env` file properly, set app key etc, and create the database tables and seed data
 
 ```bash
 bin/composer install
 cp -n .env.example .env
 bin/artisan key:generate
+bin/artisan migrate --seed
 ```
 
 The running application will be available at http://localhost:3080/ (you can change this port in `docker-compose.yml`)
